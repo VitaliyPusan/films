@@ -14,13 +14,10 @@ function App() {
 
   const getFilms = async () => {
     let res = await service.getFilms();
-    console.log(res);
     setFilms(res);
   }
 
   const addFilm = async () => {
-    console.log("add clicked!");
-
     let res = await service.createFilm({
       title: "Hello",
       year: "2020",
@@ -29,12 +26,20 @@ function App() {
     getFilms();
   }
 
+  const deleteFilm = async (film) => {
+    let res = await service.deleteFilm(film._id);
+      getFilms();
+  }
+
   const renderFilm = film => {
     return (
       <li key={film._id}>
         <h3>{film.title}</h3>
         <p>{film.year}</p>
         <p>{film.format}</p>
+        <button onClick={() => deleteFilm(film)}>
+          X
+        </button>
       </li>
     );
   };

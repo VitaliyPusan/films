@@ -6,6 +6,9 @@ export default {
     return res.data || [];
   },
   createFilm: async (film) => {
-    let res = await axios.post(`/api/film`, film);
+    await axios.post(`/api/film`, film);
+  },
+  deleteFilm: async (id) => {
+    await axios.delete(`/api/film`, { params: { id } });
   }
 }

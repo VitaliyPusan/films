@@ -16,16 +16,11 @@ module.exports = (app) => {
     })
   })
 
-  app.delete(`/api/film/:id`, async (req, res) => {
-    const {id} = req.params;
-
-    let film = await Film.findByIdAndDelete(id);
-
+  app.delete(`/api/film`, async (req, res) => {
+    let film = await Film.findByIdAndRemove(req.query.id);
     return res.status(202).send({
       error: false,
       film
     })
-
   })
-
 }
