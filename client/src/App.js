@@ -45,26 +45,31 @@ function App() {
   }
 
    const findFilm = async () => {
-    let res = await service.findFilms({title: 'Hello'});
+    let res = await service.findFilms({ title: 'Hello' });
     setFilms(res);
   }
 
    const findFilmWithStar = async () => {
-    let res = await service.findFilms({stars: 'Bred Pitt'});
+    let res = await service.findFilms({ stars: 'Bred Pitt' });
     setFilms(res);
   }
 
+  var styles = {
+    display: 'flex',
+    'flex-direction': 'row'
+  };
+
   const renderFilm = film => {
     return (
-      <li key={film._id}>
+      <button key={film._id}>       
         <h3>{film.title}</h3>
-        <p>{film.year}</p>
+        <p>{film.year}</p>       
         <p>{film.format}</p>
-        {film.stars.map(star => <span>{star} </span>)}
+        {film.stars.map(star => <p>{star}</p>)}
         <button onClick={() => deleteFilm(film)}>
           X
         </button>
-      </li>
+      </button>
     );
   };
 
