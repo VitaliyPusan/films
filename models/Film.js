@@ -5,6 +5,7 @@ const productSchema = new Schema({
     title: String,
     year: String,
     format: String,
+    stars: Array,
 })
 
 mongoose.model('films', productSchema);

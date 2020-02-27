@@ -18,17 +18,40 @@ function App() {
   }
 
   const addFilm = async () => {
-    let res = await service.createFilm({
-      title: "Hello",
+    await service.createFilm({
+      title: "Irish man",
       year: "2020",
-      format: "DVD"
+      format: "DVD",
+      stars: ["Bred Pitt", "Marlon Brando", "Al Pacino", "Tom Hanks"]
+    });
+    await service.createFilm({
+      title: "Charade",
+      year: "1953",
+      format: "DVD",
+      stars: ["Audrey Hepburn", "Bred Pitt", "Cary Grant", "Walter Matthau", "James Coburn", "George Kennedy"],
+    });
+    await service.createFilm({
+      title: "Get Shorty",
+      year: "1995",
+      format: "DVD",
+      stars: ["John Travolta", "Danny DeVito", "Renne Russo", "Gene Hackman", "Dennis Farina"]
     });
     getFilms();
   }
 
   const deleteFilm = async (film) => {
     let res = await service.deleteFilm(film._id);
-      getFilms();
+    getFilms();
+  }
+
+   const findFilm = async () => {
+    let res = await service.findFilms({title: 'Hello'});
+    setFilms(res);
+  }
+
+   const findFilmWithStar = async () => {
+    let res = await service.findFilms({stars: 'Bred Pitt'});
+    setFilms(res);
   }
 
   const renderFilm = film => {
@@ -37,6 +60,7 @@ function App() {
         <h3>{film.title}</h3>
         <p>{film.year}</p>
         <p>{film.format}</p>
+        {film.stars.map(star => <span>{star} </span>)}
         <button onClick={() => deleteFilm(film)}>
           X
         </button>
@@ -55,6 +79,14 @@ function App() {
       </ul>
       <button onClick={addFilm}>
         Add new Film
+      </button>
+
+      <button onClick={findFilm}>
+        Find Films
+      </button>
+
+      <button onClick={findFilmWithStar}>
+        Find Films with Pitt
       </button>
     </div>
   );
